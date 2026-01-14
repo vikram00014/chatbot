@@ -1,13 +1,15 @@
 // Vercel Serverless Function to handle Gemini API calls
 export default async function handler(req, res) {
     // Enable CORS
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Authorization');
 
     // Handle preflight
     if (req.method === 'OPTIONS') {
-        return res.status(200).end();
+        res.status(200).end();
+        return;
     }
 
     if (req.method !== 'POST') {
@@ -25,7 +27,8 @@ export default async function handler(req, res) {
         const API_KEY = process.env.GEMINI_API_KEY;
         
         if (!API_KEY) {
-            return res.status(500).json({ error: 'API key not configured' });
+            console.error('GEMINI_API_KEY environment variable is not set');
+            return res.status(500).json({ error: 'API key not configured. Please add GEMINI_API_KEY to environment variables.' });
         }
 
         // Build conversation context
@@ -38,8 +41,8 @@ export default async function handler(req, res) {
         fullContext += `User: ${message}`;
 
         // Call Gemini API
-        const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`,
+        const apiResponse = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
             {
                 method: 'POST',
                 headers: {
@@ -59,12 +62,13 @@ export default async function handler(req, res) {
             }
         );
 
-        if (!response.ok) {
-            const errorData = await response.json();
+        if (!apiResponse.ok) {
+            const errorData = await apiResponse.json();
+            console.error('Gemini API error:', errorData);
             throw new Error(errorData.error?.message || 'API request failed');
         }
 
-        const data = await response.json();
+        const data = await apiResponse.json();
         const assistantMessage = data.candidates[0].content.parts[0].text;
 
         return res.status(200).json({ 
@@ -72,7 +76,7 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Handler error:', error);
         return res.status(500).json({ 
             error: error.message || 'Internal server error' 
         });
