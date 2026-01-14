@@ -22,6 +22,21 @@ A beautiful and modern AI chatbot powered by Google Gemini API with a stunning p
 
 Simply open `index.html` in your browser to see the chatbot in action!
 
+**Live Demo:** [Deploy on Vercel](https://vercel.com) - See [DEPLOYMENT.md](DEPLOYMENT.md) for instructions
+
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Click the button below or follow the [detailed guide](DEPLOYMENT.md)
+
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vikram00014/chatbot)
+
+2. Add environment variable: `GEMINI_API_KEY`
+3. Deploy!
+
+For detailed instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
+
 ## 📋 Prerequisites
 
 - A modern web browser (Chrome, Firefox, Safari, Edge)
