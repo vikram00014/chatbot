@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS AI - Neural Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="background-animation">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-content">
+                <div class="bot-avatar">
+                    <div class="logo">N</div>
+                </div>
+                <div class="header-text">
+                    <h1>NEXUS AI</h1>
+                    <p><i class="fas fa-circle pulse"></i> Neural Intelligence Online</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="themeToggle" class="icon-button" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="clearChat" class="icon-button" title="Clear Chat">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <div class="logo-small">N</div>
+                </div>
+                <div class="message-wrapper">
+                    <div class="message-content">
+                        NEXUS initialized. Ready to assist.
+                    </div>
+                    <div class="message-time"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <button id="attachButton" class="icon-button" title="Attach file">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    placeholder="Type your message here..." 
+                    autocomplete="off"
+                    maxlength="2000"
+                >
+                <div class="char-counter">
+                    <span id="charCount">0</span>/2000
+                </div>
+                <button id="sendButton" title="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="suggestions" id="suggestions">
+                <button class="suggestion-chip">System Status</button>
+                <button class="suggestion-chip">Analyze Data</button>
+                <button class="suggestion-chip">Generate Code</button>
+                <button class="suggestion-chip">Run Diagnostics</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
